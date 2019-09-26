@@ -1,60 +1,45 @@
-
-//Reworking the user function to return a promise instead of a callback
-
-const getUserAsync = statusCode => {
-  const user = { name: 'Dimitri Ivanovich Mendeleiv', status: 'Badass' }
-
+const francisPromiseOfFalafels = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const status = statusCode
-      if (status === 200) {
-        resolve(user)
-      } else {
-        reject('error with our promise', status)
+      let coin = Math.round(Math.random())
+      if(coin === 1){
+        resolve("YAAAAAY FALAFELS")
       }
-    },3000)
+      else{
+        reject("FRANCIS IS A LIAR WE JUDGE HIM BOOOOO")
+      }
+    },1000)
   })
 }
 
-// getUserAsync(200)
-//   .then(user => console.log(user))
-//   .catch((errorMessage, status) => console.log(errorMessage, status))
-//   .finally(() => console.log('getUserAsync complete'))
-
-// getUserAsync(500)
-//   .then(user => console.log(user))
-//   .catch((errorMessage, status) => console.log(errorMessage, status))
-//   .finally(() => console.log('getUserAsync complete'))
-
-//Reworking the emoji function to return a promise instead of a callback
-
-const prependAnEmojiAsync = (emoji, string) => {
-  
+const griffinsPromiseOfPizza = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
+      let coin = Math.round(Math.random())
       if (true) {
-        const output = `${emoji} - ${string}`
-        resolve(output)
-      } else {
-        reject('error with emoji stuff')
+        resolve("YAAAAAY PIZZA")
       }
-    }, 2000)
+      else {
+        reject("GRIFFIN IS A LIAR WE JUDGE HIM BOOOOO")
+      }
+    }, 500)
   })
 }
 
-// prependAnEmojiAsync('😂', 'Random string here')
-//   .then(output => console.log(output))
-//   .catch(error => console.log('error'))
-//   .finally()
+// console.log(francisPromiseOfFalafels())
 
-//Combining the two functions together
 
-const getUserAndEmojiPromise = () => {
-  getUserAsync(400)
-    .then(userObj => prependAnEmojiAsync('🎂', userObj.name))
-    .then(output => console.log(output))
-    .catch(error => console.log(error))
-    .finally(() => console.log('Callback hell averted'))
-}
+francisPromiseOfFalafels()
+  .then(reaction => console.log(reaction))
+  .catch(reaction => griffinsPromiseOfPizza())
+  .then(reaction => console.log(reaction))
+  .catch(() => console.log("nofood"))
+  .finally(() => console.log("That rollercoaster of emotions is finally done."))
 
-getUserAndEmojiPromise()
+// Promise.all([griffinsPromiseOfPizza(), francisPromiseOfFalafels()])
+//   .then(values => {
+//     console.log(values)
+//   })
+//   .catch(errors => {
+//     console.log(errors)
+//   })

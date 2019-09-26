@@ -1,39 +1,76 @@
-const taxes = 14.975
-const randomObject = {}
-randomObject.userId = 5
+//Spelling, syntax, forgetting
 
-// randomObject = {userId : 5} //This is bad !
-//Creating a function that generates an error
+//Tax system
+const taxAmount = 0.14975;
+let price = 0;
 
-const diminishTaxes = amount => {
-  taxes -= amount
-  console.log('The taxes are now :'+taxes)
+price = 22.99;
+console.log(price+price*taxAmount)
+
+try{
+  taxAmount = 0.10;
 }
-//Avoiding a crash by using the try/catch method
-
-try {
-  diminishTaxes(2)
-  texes = 0
-} catch (error) {
-  console.log('You have an error', error.name)
+catch(error){
+  console.log(error.message)
+  console.log("Prices are still calculated with tax amount: "+taxAmount)
 }
-console.log('try catch complete !')
-
-//Does it work on asynchronous functions ?
-
-const diminishTaxesAsync = amount => {
-  setTimeout(() => {
-    taxes -= amount
-    console.log('The taxes are now :' + taxes)
-  }, 3000)
+finally{
+  price = 19.99
+  console.log(price + price * taxAmount)
 }
 
-try {
-  diminishTaxesAsync(2)
-  texes = 0
-} catch (error) {
-  console.log('You have an error', error.name)
+console.log("So that's the prices !")
+
+
+
+const refrigerator = {
+  "🍕": { quantity: 20 },
+  "🥐": { quantity: 20 },
+  "🥟": { quantity: 20 },
+  "🍦": { quantity: 20 },
+  "🍺": { quantity: 20 },
+  "🍌":{quantity:20}
 }
-console.log('try catch complete !')
+
+//Soft ice cream dumplings 1 icecreams for 5 dumplings
+
+const softIceDumplings = () => {
+  refrigerator["🍦"].quantity -= 1
+  refrigerator["🥟"].quantity -= 5
+  console.log("🥟🍦 done ! ")
+}
+
+softIceDumplings()
+console.log(refrigerator)
 
 
+const softIceDumplingsWithShrimp = () => {
+  for (const ingredient of ["🥟","🍦","🍤"]){
+    try{
+      refrigerator[ingredient].quantity > 0
+    }
+    catch(e){
+      return new Error ("Ingredient is missing in the fridge")
+    }
+  }
+  refrigerator["🍦"].quantity -= 1
+  refrigerator["🥟"].quantity -= 5
+  refrigerator["🍤"].quantity -= 1
+
+  return "🥟🍦🍤 done ! "
+}
+console.log(softIceDumplingsWithShrimp())
+console.log(refrigerator)
+
+const slowDumpling = () => {
+  setTimeout( () => {
+    refrigerator["🍤"].quantity -= 1
+  },2000)
+}
+
+try{
+  slowDumpling()
+}
+catch(e){
+  console.log(e.message)
+}
